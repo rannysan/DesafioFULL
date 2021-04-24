@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+footer {
+  width: 100%;
+  line-height: 2em;
+  position: absolute;
+  font-size: 0.6875em;
+
+  .footer-item {
+    border-top: 0.1875em solid;
+    box-sizing: border-box;
+    padding-left: 0.3125em;
+    text-align: left;
+  }
+
+  .footer-unit {
+    padding-left: 0.625em;
+    text-transform: uppercase;
+  }
+
+  .footer-software {
+    padding-left: 0.625em;
+    text-transform: uppercase;
+  }
+
+  .footer-version {
+    text-align: right;
+    padding-right: 0.625em;
+  }
+}

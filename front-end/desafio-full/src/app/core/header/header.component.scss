@@ -1,0 +1,21 @@
+.mat-toolbar,
+.mat-toolbar-row {
+  height: 2.4em !important;
+  min-height: 2.4em !important;
+}
+
+.mat-toolbar h6 {
+    font-size: 1em !important;
+    font-weight: normal !important;
+  }
+
+  mat-toolbar {
+    z-index: 6;
+    position: relative;
+  }
+
+  .logo {
+    margin-left: 5px;
+    width: 150px;
+    padding-left: 8px;
+  }
