@@ -1,1 +1,15 @@
-<p>debt-form works!</p>
+<form [formGroup]="form" (ngSubmit)="save.emit()" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field appearance="outline" fxFlexFill>
+            <mat-label>Outline form field</mat-label>
+            <input matInput placeholder="Número do título" formControlName="titleNumber" #titleNumber>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlexFill appearance="outline">
+            <input matInput placeholder="Nome do Devedor" formControlName="debtorName" #debtorName maxlength="100">
+            <!-- <mat-hint align="end">{{ debtorName.value.length }} / 100</mat-hint> -->
+        </mat-form-field>
+    </div>
+</form>

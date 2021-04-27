@@ -1,0 +1,46 @@
+:host ::ng-deep {
+    .list-card {
+      padding: 0.5em 1em;
+      line-height: 1.125em !important;
+      max-width: calc(100% - 5px);
+      border-bottom: 0.0625em solid #cccccc;
+      margin-bottom: 0.5em;
+  
+      &:hover {
+        cursor: pointer;
+      }
+  
+      .title {
+        font-size: 0.9375em;
+        font-weight: 500;
+      }
+  
+      .title-normal {
+        font-size: 0.875em;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .list-header {
+    padding: 1em;
+    font-size: 1em;
+    border-bottom: 0.0625em solid #cccccc;
+    margin-bottom: 0.5em;
+    height: 4em;
+  
+    h2.page-title {
+      font-weight: normal;
+      font-size: 2em;
+    }
+  
+    .actions {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+
+  .header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }

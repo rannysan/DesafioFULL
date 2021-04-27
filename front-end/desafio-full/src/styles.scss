@@ -28,3 +28,33 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding: 0.5em 1em;
     height: calc(100vh - 5.625em);
   }
+
+  .bottom-sheet {
+    min-height: calc(100vh - 2em) !important;
+    height: calc(100vh - 2em) !important;
+    max-height: calc(100vh - 2em) !important;
+  
+    @media screen and (min-width: 1024px) {
+      min-width: 60vw !important;
+      max-width: 60vw !important;
+      width: 60vw !important;
+    }
+  
+    @media screen and (max-width: 1023px) {
+      min-width: 100vw !important;
+      max-width: 100vw !important;
+      width: 100vw !important;
+  
+      min-height: 100vh !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+    }
+  }
+
+  .transparent {
+    background-color: transparent !important;
+  }
+
+  .fill-space {
+    flex: 1 1 auto;
+  }

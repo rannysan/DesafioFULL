@@ -18,7 +18,7 @@ const routes: Routes = [
                         component: DebtComponent,
                     },
                     {
-                        path: 'edit/:identifier/:name',
+                        path: 'edit/:id',
                         component: DebtComponent,
                     },
                 ]

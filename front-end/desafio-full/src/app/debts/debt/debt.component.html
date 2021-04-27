@@ -1,1 +1,28 @@
-<p>debt works!</p>
+<mat-toolbar class="toolbar transparent">
+
+    <button mat-icon-button type="button" (click)="checkCancel()" matTooltip="Fechar">
+        <mat-icon>clear</mat-icon>
+    </button>
+
+    <span class="toolbar-title">
+        {{ !debt.id ? 'Cadastrar' : 'Editar' }} Dívida
+    </span>
+
+    <span class="fill-space"></span>
+
+    <button *ngIf="debt.id" mat-icon-button matTooltip="Remover" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+    </button>
+
+    <!-- <button *ngIf="this.hasTechnicalStandardAddEdit" mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="save()" [disabled]="isLoadingData || isSaving" [style.margin-left.em]="0.5">
+       <mat-icon [style.margin-right.em]="0.25">done</mat-icon>
+      <span>{{ isSaving ? 'SALVANDO...' : 'SALVAR' }}</span>
+    </button> -->
+
+</mat-toolbar>
+
+<div class="inner-component">
+    <div class="tab-content">
+        <app-debt-form #form [debt]="debt" (save)="save()"></app-debt-form>
+    </div>
+</div>
