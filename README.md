@@ -7,7 +7,7 @@ Para rodar o front-end sera necessário entrar no diretório 'front-end/desafio-
 - npm install
 Para instalar as dependências necessárias.
 
--ng s --open
+- ng s --open
 Para rodar a aplicação e abrir a mesma no navegador.
 
 
