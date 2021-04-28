@@ -1,15 +1,37 @@
 <form [formGroup]="form" (ngSubmit)="save.emit()" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between">
-        <mat-form-field appearance="outline" fxFlexFill>
-            <mat-label>Outline form field</mat-label>
-            <input matInput placeholder="Número do título" formControlName="titleNumber" #titleNumber>
+        <mat-form-field appearance="outline" fxFlexFill fxFlex="48">
+            <mat-label>Número do título</mat-label>
+            <input type="number" matInput placeholder="Número do título" formControlName="titleNumber" #titleNumber>
         </mat-form-field>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between">
-        <mat-form-field fxFlexFill appearance="outline">
+        <mat-form-field fxFlex="48" appearance="outline">
+            <mat-label>Nome do Devedor</mat-label>
             <input matInput placeholder="Nome do Devedor" formControlName="debtorName" #debtorName maxlength="100">
-            <!-- <mat-hint align="end">{{ debtorName.value.length }} / 100</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field fxFlex="48" appearance="outline">
+            <mat-label>CPF do Devedor</mat-label>
+            <input matInput placeholder="CPF do Devedor" formControlName="debtorCPF" #debtorCpf mask="000.000.000-00"
+                maxlength="15">
+        </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="48" appearance="outline">
+            <mat-label>% de juros</mat-label>
+            <input type="number" matInput placeholder="% de juros" formControlName="interestPercentageRate"
+                #interestPercentageRate>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="48" appearance="outline">
+            <mat-label>% de multa</mat-label>
+            <input type="number" matInput placeholder="% de multa" formControlName="penaltyPercentageRate"
+                #penaltyPercentageRate>
         </mat-form-field>
     </div>
 </form>
+
+<app-installment [debt]="debt" *ngIf="debt && debt.id"></app-installment>

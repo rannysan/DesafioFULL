@@ -1,0 +1,47 @@
+<mat-accordion class="panel-headers-align">
+  <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Parcelas
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div>
+      <mat-list *ngIf="installments.length > 0">
+        <mat-list-item class="mat-elevation-z1" *ngFor="let installment of installments">
+          <div class="list-card" fxFlex fxLayoutAlign="start center">
+            <div fxFlex="30">
+              <div class="title word-break">Número: {{installment.number}} </div>
+            </div>
+
+            <div fxFlex="40">
+              <div class="title-normal word-break">Data de vencimento: {{installment.dueDate | date:'dd/MM/yyyy'}}</div>
+            </div>
+
+            <div fxFlex="20">
+              <div class="title-normal word-break">Valor: {{installment.value}}</div>
+            </div>
+
+            <div fxFlex="15">
+              <button mat-icon-button aria-label="Editar" (click)="edit(installment.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button aria-label="Deletar" (click)="delete(installment.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <p *ngIf="installments.length <= 0">Nenhuma parcela cadastrada</p>
+    </div>
+
+    <button type="button" mat-raised-button color="primary" [style.margin-top.em]="1" (click)="create()">
+      <mat-icon>add</mat-icon>
+      ADICIONAR
+    </button>
+
+  </mat-expansion-panel>
+</mat-accordion>

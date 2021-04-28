@@ -14,15 +14,18 @@
         <mat-icon>delete</mat-icon>
     </button>
 
-    <!-- <button *ngIf="this.hasTechnicalStandardAddEdit" mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="save()" [disabled]="isLoadingData || isSaving" [style.margin-left.em]="0.5">
-       <mat-icon [style.margin-right.em]="0.25">done</mat-icon>
-      <span>{{ isSaving ? 'SALVANDO...' : 'SALVAR' }}</span>
-    </button> -->
-
 </mat-toolbar>
 
 <div class="inner-component">
+    <mat-divider class="divider"></mat-divider>
+
     <div class="tab-content">
         <app-debt-form #form [debt]="debt" (save)="save()"></app-debt-form>
+    </div>
+
+    <div class="save-button">
+        <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="save()">
+            <span>SALVAR</span>
+        </button>
     </div>
 </div>

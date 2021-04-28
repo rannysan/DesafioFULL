@@ -16,7 +16,7 @@ namespace desafio_full.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost; Initial Catalog=desafio_full; Integrated Security=false; User Id=sa; Password=password;");
+            optionsBuilder.UseSqlServer("Data Source=localhost; Initial Catalog=desafio_full; Integrated Security=false; User Id=sa; Password=abc123##;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

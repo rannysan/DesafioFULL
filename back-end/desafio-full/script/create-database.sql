@@ -19,14 +19,13 @@ create table dbo.debts
 );
 go
 
-create table dbo.installment
+create table dbo.installments
 (
 	id int identity(1,1) not null
 	,number int not null
 	,due_date datetimeoffset(7) not null default(sysdatetimeoffset())
 	,value decimal(18, 2) NOT NULL
 	,id_debt int not null
-	,penalty_percentage_rate decimal(18, 2) NOT NULL  
 	,creation_date datetimeoffset(7) not null default(sysdatetimeoffset())
 	,last_update datetimeoffset(7) not null default(sysdatetimeoffset())
 	,constraint PK_installment primary key (id)

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CoreModule } from './core/core.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DebtModule } from './debts/debt.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-
+    DebtModule,
     
     MatSnackBarModule,
   ],

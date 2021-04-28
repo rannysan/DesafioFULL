@@ -13,6 +13,6 @@ export interface IDebtList {
     numberOfInstallments: number;
     originalValue: number;
     daysOfDelay: number;
-    updateValue:number;
+    updateValue:number | string;
   }
   

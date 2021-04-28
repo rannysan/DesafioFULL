@@ -10,11 +10,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+import { NgxMaskModule } from 'ngx-mask';
 
 import { DebtRoutingModule } from './debt-routing.module';
 import { DebtFormComponent } from './debt-form/debt-form.component';
 import { DebtListComponent } from './debt-list/debt-list.component';
 import { DebtBottomSheetComponent, DebtComponent } from './debt/debt.component';
+import { InstallmentComponent } from './installment/installment.component';
+import { InstallmentFormDialogComponent } from './dialogs/installment-form-dialog/installment-form-dialog.component';
+import { InstallmentFormDialogService } from './dialogs/installment-form-dialog/installment-form-dialog.service';
 
 @NgModule({
     imports: [
@@ -33,6 +43,13 @@ import { DebtBottomSheetComponent, DebtComponent } from './debt/debt.component';
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+
+        NgxMaskModule.forRoot(),
     ],
     exports: [
 
@@ -42,9 +59,15 @@ import { DebtBottomSheetComponent, DebtComponent } from './debt/debt.component';
         DebtListComponent,
         DebtComponent,
         DebtBottomSheetComponent,
+        InstallmentComponent,
+        InstallmentFormDialogComponent,
     ],
     entryComponents: [
         DebtBottomSheetComponent,
+        InstallmentFormDialogComponent,
+    ],
+    providers: [
+        InstallmentFormDialogService,
     ],
 })
 export class DebtModule { }

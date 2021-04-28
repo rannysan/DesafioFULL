@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IDebtDetails } from 'src/app/view-models/debts/debt-details.interface';
+import { IServiceResponse } from 'src/app/view-models/service-response.interface';
 import { DebtFormComponent } from '../debt-form/debt-form.component';
 import { DebtListComponent } from '../debt-list/debt-list.component';
 import { DebtService } from '../shared/debt.service';
@@ -20,9 +21,8 @@ export class DebtBottomSheetComponent implements OnInit {
 
   debt: IDebtDetails = {} as IDebtDetails;
 
-  public refreshList = false;
-
   constructor(
+    private router: Router,
     private bottomSheetRef: MatBottomSheetRef<DebtBottomSheetComponent>,
     private debtService: DebtService,
     private snackBar: MatSnackBar,
@@ -37,7 +37,7 @@ export class DebtBottomSheetComponent implements OnInit {
     if (this.debt && this.debt.id) {
       this.debtService
         .getDebtsById(this.debt.id)
-        .subscribe((result) => {
+        .subscribe((result: IServiceResponse<IDebtDetails>) => {
           if (result.success) {
             this.debt = result.data;
             this.formComponent?.patchForm(this.debt);
@@ -61,7 +61,7 @@ export class DebtBottomSheetComponent implements OnInit {
   delete(): void {
     this.debtService
       .delete(this.debt.id)
-      .subscribe((result) => {
+      .subscribe((result: IServiceResponse<null>) => {
         if (result.success) {
           this.snackBar.open(`Dívida número ${this.debt.titleNumber} deletada com sucesso.`, '', {
             duration: 4000,
@@ -69,7 +69,6 @@ export class DebtBottomSheetComponent implements OnInit {
             verticalPosition: 'top',
           });
 
-          this.refreshList = true;
           this.bottomSheetRef.dismiss(false);
         }
 
@@ -81,8 +80,36 @@ export class DebtBottomSheetComponent implements OnInit {
 
   save(): void {
 
+    if (!this.formComponent?.isValid())
+      return;
+
+    this.debt = this.assignObject();
+
+    this.debtService
+      .save(this.debt)
+      .subscribe((result: IServiceResponse<number>) => {
+        if (result.success) {
+          this.snackBar.open(`Dívida ${!this.debt.id ? 'cadastrada' : 'editada'} com sucesso.`, '', {
+            duration: 4000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+          this.router.navigate([`${this.router.url.split(/\/(new|edit)\/?/gi)[0]}/edit/${result.data}`]);
+        }
+
+        this.cdRef.markForCheck();
+      }, () => {
+
+        this.snackBar.open('Não foi possível salvar os dados.', '', { duration: 4000 });
+        this.cdRef.markForCheck();
+      });
   }
 
+  assignObject(): IDebtDetails {
+    const fData = this.formComponent?.form.value;
+    const newDebt: IDebtDetails = Object.assign(this.debt, fData);
+    return newDebt;
+  }
 }
 
 @Component({
@@ -112,8 +139,8 @@ export class DebtComponent {
       .afterDismissed()
       .subscribe((res: boolean) => {
         this.router.navigate([this.router.url.split(/\/(new|edit)\/?/gi)[0]]);
-        if (res || bottomSheetRef.instance.refreshList)
-          this.debtListComponent.refresh();
+
+        this.debtListComponent.refresh();
       });
   }
 }

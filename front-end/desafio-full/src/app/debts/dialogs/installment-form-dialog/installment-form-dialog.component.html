@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>{{installment.id ? 'Editar' : 'Cadastrar'}} Parcela</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-form-field appearance="outline" fxFlexFill fxFlex="48">
+        <mat-label>Número</mat-label>
+        <input type="number" matInput placeholder="Número" formControlName="number">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-form-field fxFlex="48" appearance="outline">
+        <mat-label>Data de vencimento</mat-label>
+        <input formControlName="dueDate" placeholder="Data de Vencimento" matInput [matDatepicker]="dueDatePicker">
+        <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #dueDatePicker></mat-datepicker>
+        <mat-error>Data de vencimento é necessária</mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="48" appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input type="number" matInput placeholder="Valor" formControlName="value">
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-buttons">
+  <button mat-raised-button color="primary" (click)="cancel()">CANCELAR</button>
+  <button mat-raised-button cdkFocusInitial color="primary" (click)="save()">OK</button>
+</div>

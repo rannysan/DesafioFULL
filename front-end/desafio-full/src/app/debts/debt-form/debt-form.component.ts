@@ -22,17 +22,16 @@ export class DebtFormComponent {
     this.form = new FormGroup({
       titleNumber: new FormControl(null, [Validators.required]),
       debtorName: new FormControl(null, [Validators.required, Validators.maxLength(100)]),
-      debtorCpf: new FormControl(null, [Validators.required, Validators.maxLength(15)]),
+      debtorCPF: new FormControl(null, [Validators.required, Validators.maxLength(15)]),
       interestPercentageRate: new FormControl(null, [Validators.required]),
       penaltyPercentageRate: new FormControl(null, [Validators.required]),
     });
-
   }
 
   isValid(): boolean {
     this.form.get('titleNumber')?.markAsTouched();
     this.form.get('debtorName')?.markAsTouched();
-    this.form.get('debtorCpf')?.markAsTouched();
+    this.form.get('debtorCPF')?.markAsTouched();
     this.form.get('interestPercentageRate')?.markAsTouched();
     this.form.get('penaltyPercentageRate')?.markAsTouched();
 

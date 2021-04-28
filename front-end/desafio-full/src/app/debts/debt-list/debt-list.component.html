@@ -1,13 +1,14 @@
 <div class="list-header" fxLayout="row">
     <div fxFlex="100" class="header">
-        <div fxLayout="row" fxLayoutAlign="start center"> 
+        <div fxLayout="row" fxLayoutAlign="start center">
             <div>
                 <h2 class="page-title">Dívidas</h2>
             </div>
         </div>
 
         <div>
-            <button mat-raised-button color="primary" [style.margin-top.em]="3.8" fxLayoutAlign="end end" (click)="openBottomSheet()">
+            <button mat-raised-button color="primary" [style.margin-top.em]="3.8" fxLayoutAlign="end end"
+                (click)="openBottomSheet()">
                 <mat-icon>add</mat-icon>
                 <span>CADASTRAR</span>
             </button>
@@ -16,7 +17,7 @@
 </div>
 
 <div>
-    <mat-selection-list #shoes [multiple]="false">
+    <mat-selection-list [multiple]="false">
         <mat-list-option *ngFor="let debt of debts" [value]="debt" (click)="openBottomSheet(debt.id)">
             <div class="list-card" fxFlex fxLayoutAlign="start center">
                 <div fxFlex>
@@ -25,13 +26,13 @@
                 </div>
 
                 <div fxFlex="30">
-                    <div class="title-normal word-break">Qtde de parcelas: 3</div>
-                    <div class="title-normal word-break">Valor original: R$ 200,00</div>
+                    <div class="title-normal word-break">Qtde de parcelas: {{debt.numberOfInstallments}}</div>
+                    <div class="title-normal word-break">Valor original: R$ {{debt.originalValue}}</div>
                 </div>
 
                 <div fxFlex="30">
-                    <div class="title-normal word-break">Dias de atraso: 17</div>
-                    <div class="title-normal word-break">Valor atualizado: R$ 270,00</div>
+                    <div class="title-normal word-break">Dias de atraso: {{debt.daysOfDelay}}</div>
+                    <div class="title-normal word-break">Valor atualizado: R$ {{debt.updateValue}}</div>
                 </div>
             </div>
         </mat-list-option>

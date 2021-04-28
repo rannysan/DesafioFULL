@@ -1,5 +1,6 @@
 using desafio_full.Data;
 using desafio_full.Debts.Services;
+using desafio_full.Services.Installments;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,8 @@ namespace desafio_full
                 options.UseSqlServer(Configuration.GetConnectionString("DevConnection"))
             );
 
-            services.AddScoped<DebtService>();
+            services.AddScoped<DebtService>(); 
+            services.AddScoped<InstallmentService>();
             services.AddControllers();
         }
 

@@ -1,7 +1,7 @@
 export interface IInstallmentDetails {
     id: number;
     number: number;
-    debtorName: string;
+    debtId:number;
     value: number;
     dueDate: Date;
   }

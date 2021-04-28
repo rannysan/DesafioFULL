@@ -8,3 +8,27 @@
     font-size: 1em;
     font-weight: normal;
   }
+
+  .inner-component {
+    height: calc(100vh - 7em);
+  }
+  
+  .tab-content {
+    height: calc(100vh - 14em);
+    padding: 0.5em;
+  
+    .virtual-scroll {
+      height: calc(100vh - 16.56em);
+      padding: 0.5em;
+    }
+  }
+
+.divider {
+  margin: 0.5em 0;  
+  margin-bottom: 2em;
+}
+
+.save-button {
+  display: flex;
+  justify-content: flex-end;
+}
