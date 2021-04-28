@@ -7,6 +7,7 @@ import { IDebtDetails } from 'src/app/view-models/debts/debt-details.interface';
 import { IInstallmentDetails } from 'src/app/view-models/installments/installment-details.interface';
 import { IServiceResponse } from 'src/app/view-models/service-response.interface';
 import { InstallmentService } from '../../shared/installment.service.service';
+import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-installment-form-dialog',
@@ -25,6 +26,7 @@ export class InstallmentFormDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<InstallmentFormDialogComponent>,
+    private confirmDialogService: ConfirmDialogService,
     private installmentService: InstallmentService,
     private cdRef: ChangeDetectorRef,
     private snackBar: MatSnackBar,
@@ -63,12 +65,12 @@ export class InstallmentFormDialogComponent implements OnInit {
 
   cancel(): void {
     if (this.form.dirty) {
-      // this.confirmDialogService
-      //   .confirm('Descartar Alterações', 'Ao descartar, as mudanças realizadas serão perdidas.', 'DESCARTAR')
-      //   .subscribe((rs: boolean) => {
-      //     if (rs)
-      this.dialogRef.close(true);
-      // });
+      this.confirmDialogService
+        .confirm('Descartar Alterações', 'Ao descartar, as mudanças realizadas serão perdidas.', 'DESCARTAR')
+        .subscribe((rs: boolean) => {
+          if (rs)
+            this.dialogRef.close(true);
+        });
     } else {
       this.dialogRef.close(true);
     }
@@ -82,7 +84,7 @@ export class InstallmentFormDialogComponent implements OnInit {
       .save(this.installment)
       .subscribe((data: IServiceResponse<null>) => {
 
-          this.dialogRef.close(true);
+        this.dialogRef.close(true);
 
       }, () => {
 

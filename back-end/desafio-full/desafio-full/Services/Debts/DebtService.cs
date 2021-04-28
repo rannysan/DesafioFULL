@@ -74,10 +74,13 @@ namespace desafio_full.Debts.Services
             if (id <= 0)
                 return new ServiceResponse<int>("Parameter id cannot be 0.");
 
-            var debt = await _context.Debts.FirstOrDefaultAsync(d => d.Id == id);
+            var debt = await _context.Debts.Include(d => d.Installments).FirstOrDefaultAsync(d => d.Id == id);
 
             if (debt == null)
                 return new ServiceResponse<int>("The debt was not found.");
+
+            if (debt.Installments != null)
+                _context.Installments.RemoveRange(debt.Installments);
 
             _context.Debts.Remove(debt);
 

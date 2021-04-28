@@ -7,6 +7,7 @@ import { IDebtDetails } from 'src/app/view-models/debts/debt-details.interface';
 import { IServiceResponse } from 'src/app/view-models/service-response.interface';
 import { DebtFormComponent } from '../debt-form/debt-form.component';
 import { DebtListComponent } from '../debt-list/debt-list.component';
+import { ConfirmDialogService } from '../dialogs/confirm-dialog/confirm-dialog.service';
 import { DebtService } from '../shared/debt.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class DebtBottomSheetComponent implements OnInit {
   constructor(
     private router: Router,
     private bottomSheetRef: MatBottomSheetRef<DebtBottomSheetComponent>,
+    private confirmDialogService: ConfirmDialogService,
     private debtService: DebtService,
     private snackBar: MatSnackBar,
     private cdRef: ChangeDetectorRef,
@@ -55,26 +57,47 @@ export class DebtBottomSheetComponent implements OnInit {
   }
 
   checkCancel(): void {
-    this.bottomSheetRef.dismiss(false);
+    if (this.formComponent?.form.dirty) {
+      this.confirmDialogService
+        .confirm('Descartar Alterações', 'Ao descartar, as mudanças realizadas serão perdidas.', 'DESCARTAR')
+        .subscribe((rs: boolean) => {
+          if (rs)
+            this.bottomSheetRef.dismiss(false);
+        });
+    } else {
+      this.bottomSheetRef.dismiss(false);
+    }
   }
 
   delete(): void {
-    this.debtService
-      .delete(this.debt.id)
-      .subscribe((result: IServiceResponse<null>) => {
-        if (result.success) {
-          this.snackBar.open(`Dívida número ${this.debt.titleNumber} deletada com sucesso.`, '', {
-            duration: 4000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
+
+    this.confirmDialogService
+      .confirm('Remover', 'Deseja realmente deletar esta dívida?', 'REMOVER')
+      .subscribe((res: boolean) => {
+        if (!res)
+          return;
+
+        this.debtService
+          .delete(this.debt.id)
+          .subscribe((result: IServiceResponse<null>) => {
+            if (result.success) {
+              this.snackBar.open(`Dívida número ${this.debt.titleNumber} deletada com sucesso.`, '', {
+                duration: 4000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+              });
+
+              this.bottomSheetRef.dismiss(false);
+            }
+
+            this.cdRef.markForCheck();
+          }, (error) => {
+            this.snackBar.open(`Não foi possível deletar a dívida.`, '', {
+              duration: 4000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+            });
           });
-
-          this.bottomSheetRef.dismiss(false);
-        }
-
-        this.cdRef.markForCheck();
-      }, (error) => {
-
       });
   }
 

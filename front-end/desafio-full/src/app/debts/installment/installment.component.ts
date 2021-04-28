@@ -6,6 +6,7 @@ import { InstallmentFormDialogService } from '../dialogs/installment-form-dialog
 import { IDebtDetails } from 'src/app/view-models/debts/debt-details.interface';
 import { InstallmentService } from '../shared/installment.service.service';
 import { IServiceResponse } from 'src/app/view-models/service-response.interface';
+import { ConfirmDialogService } from '../dialogs/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-installment',
@@ -21,6 +22,7 @@ export class InstallmentComponent implements OnInit {
   panelOpenState = false;
 
   constructor(
+    private confirmDialogService: ConfirmDialogService,
     private installmentFormDialogService: InstallmentFormDialogService,
     private installmentService: InstallmentService,
     private cdRef: ChangeDetectorRef,
@@ -67,18 +69,26 @@ export class InstallmentComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.installmentService
-      .delete(id)
-      .subscribe((result: IServiceResponse<null>) => {
-        if (result.success) {
-          this.snackBar.open("Parcela deletada com sucesso.", '', {
-            duration: 4000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-          this.refresh();
-        }
-      });;
+
+    this.confirmDialogService
+      .confirm('Remover', 'Deseja realmente deletar esta dívida?', 'REMOVER')
+      .subscribe((res: boolean) => {
+        if (!res)
+          return;
+
+        this.installmentService
+          .delete(id)
+          .subscribe((result: IServiceResponse<null>) => {
+            if (result.success) {
+              this.snackBar.open("Parcela deletada com sucesso.", '', {
+                duration: 4000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+              });
+              this.refresh();
+            }
+          });;
+      });
   }
 
 }

@@ -25,6 +25,8 @@ import { DebtBottomSheetComponent, DebtComponent } from './debt/debt.component';
 import { InstallmentComponent } from './installment/installment.component';
 import { InstallmentFormDialogComponent } from './dialogs/installment-form-dialog/installment-form-dialog.component';
 import { InstallmentFormDialogService } from './dialogs/installment-form-dialog/installment-form-dialog.service';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from './dialogs/confirm-dialog/confirm-dialog.service';
 
 @NgModule({
     imports: [
@@ -61,13 +63,16 @@ import { InstallmentFormDialogService } from './dialogs/installment-form-dialog/
         DebtBottomSheetComponent,
         InstallmentComponent,
         InstallmentFormDialogComponent,
+        ConfirmDialogComponent,
     ],
     entryComponents: [
         DebtBottomSheetComponent,
         InstallmentFormDialogComponent,
+        ConfirmDialogComponent,
     ],
     providers: [
         InstallmentFormDialogService,
+        ConfirmDialogService,
     ],
 })
 export class DebtModule { }
